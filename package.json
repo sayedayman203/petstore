@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
-    "test": "jasmine",
+    "pretest": "cross-env-shell NODE_ENV=test \"npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate\"",
+    "test": "cross-env NODE_ENV=test jasmine",
     "db:migrate": "npx sequelize-cli db:migrate --env default",
     "db:reset": "npx sequelize-cli db:drop --env default && npx sequelize-cli db:create --env default && npm run db:migrate"
   },
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/sayedayman203/petstore#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-rate-limit": "^6.6.0",
@@ -38,6 +40,8 @@
   },
   "devDependencies": {
     "jasmine": "^4.5.0",
-    "nodemon": "^2.0.20"
+    "jasmine-spec-reporter": "^7.0.0",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.1"
   }
 }
